@@ -1,6 +1,8 @@
 
 # odvis
 
+[![R-CMD-check](https://github.com/rogerbeecham/odvis/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rogerbeecham/odvis/actions/workflows/R-CMD-check.yaml)
+
 `odvis` is an R package that provides helper functions for visualizing
 directed origin-destination data using `ggplot2`.
 
@@ -11,8 +13,7 @@ You can install the development version of `odvis` from
 
 ``` r
 # install.packages("devtools")
-#devtools::install_github("rogerbeecham/odvis")
-devtools::load_all()
+devtools::install_github("rogerbeecham/odvis")
 library(tibble)
 library(dplyr)
 library(ggplot2)

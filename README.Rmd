@@ -13,6 +13,9 @@ knitr::opts_chunk$set(
 
 # odvis
 
+[![R-CMD-check](https://github.com/rogerbeecham/odvis/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rogerbeecham/odvis/actions/workflows/R-CMD-check.yaml)
+
+
 `odvis` is an R package that provides helper functions for visualizing directed origin-destination data using `ggplot2`.  
 
 ## Installation
