@@ -14,6 +14,16 @@ You can install the development version of `odvis` from
 ``` r
 # install.packages("devtools")
 devtools::install_github("rogerbeecham/odvis")
+#> 
+#> ── R CMD build ─────────────────────────────────────────────────────────────────
+#>      checking for file ‘/private/var/folders/5x/wcs8tp_95md1j7l5cprqt7mm0000gq/T/RtmpvfIIGh/remotes11f86179a9c23/rogerbeecham-odvis-6deb0aa/DESCRIPTION’ ...  ✔  checking for file ‘/private/var/folders/5x/wcs8tp_95md1j7l5cprqt7mm0000gq/T/RtmpvfIIGh/remotes11f86179a9c23/rogerbeecham-odvis-6deb0aa/DESCRIPTION’
+#>   ─  preparing ‘odvis’:
+#>      checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
+#>   ─  checking for LF line-endings in source and make files and shell scripts
+#>   ─  checking for empty or unneeded directories
+#>   ─  building ‘odvis_0.0.0.9000.tar.gz’
+#>      
+#> 
 library(tibble)
 library(dplyr)
 library(ggplot2)
