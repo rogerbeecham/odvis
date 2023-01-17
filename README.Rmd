@@ -25,10 +25,14 @@ You can install the development version of `odvis` from [GitHub](https://github.
 ``` {r, install_github, echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE}
 # install.packages("devtools")
 devtools::install_github("rogerbeecham/odvis")
+devtools::load_all()
 library(tibble)
 library(dplyr)
 library(ggplot2)
 library(ggforce)
+library(purrr)
+library(tidyr)
+library(sf)
 library(odvis)
 ```
 
@@ -119,5 +123,77 @@ dat |>
 ```
 
 ## Application 
+
+``` {r, apply-bezier-line, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
+trajectories <- bs_ods |> 
+  filter(start_station_id!=end_station_id, count > 250) |> 
+  mutate( id=row_number(), od_pair=paste0(start_station_id, "-", end_station_id)) |> 
+  dplyr::select(-c(start_station_id, end_station_id, o_name, d_name, count)) |> 
+  nest(data=c(od_pair, o_east, o_north, d_east, d_north)) |> 
+  mutate(trajectory=
+           map(data, 
+               ~get_trajectory(.x$o_east, .x$o_north, .x$d_east, .x$d_north, .x$od_pair)
+               )
+         ) |> 
+  select(trajectory) |> unnest(cols=trajectory)
+
+dat <-
+  tibble(
+    od_pair="demo",
+    o_east=0,
+    d_east=1,
+    o_north=1,
+    d_north=1
+  )
+
+dat <- get_trajectory(dat$o_east, dat$o_north, dat$d_east, dat$d_north, dat$od_pair)
+dat <- dat %>% mutate(row=row_number(),
+                      type=if_else(row==1,"origin", if_else(row==2,"mid", "destination")))
+
+legend <- ggplot() +
+  geom_point(data=dat %>% filter(row!=2), aes(x=x, y=y), size=1, colour="#737373", alpha=0.5)+
+  ggforce::geom_bezier0(data=dat, aes(x=x, y=y, group=od_pair), colour="#737373")+
+  coord_equal()+
+  geom_text(data=dat %>% filter(row!=2),
+            aes(x=x, y=y-0.1, label=type), 
+            colour="#252525", size=2.5, show.legend=FALSE, hjust="Middle", vjust="Top")+
+  scale_x_continuous(limits=c(-0.1,1.3))+
+  scale_y_continuous(limits=c(0.8,1.19))+
+  theme_void()
+
+
+bbox <- st_bbox(bs_villages)
+width <- unname(bbox$xmax)-unname(bbox$xmin) 
+height <- unname(bbox$ymax)-unname(bbox$ymin) 
+aspect <- width/height
+
+trajectories |> 
+  left_join(
+    bs_ods |> mutate(od_pair=paste0(start_station_id, "-", end_station_id)) |> 
+      select(od_pair, count)
+  ) |> 
+  filter(count>100) |> 
+  ungroup() |> 
+  mutate(f_od=(count/max(count))^.4, count, max(count)) |> 
+  ggplot() +
+  geom_sf(data=bs_villages, fill="#f0f0f0",  colour="#bdbdbd", size=.2, alpha=.5)+
+  geom_sf(data=rivers, fill="#d9d9d9",  colour="#d9d9d9")+
+  ggforce::geom_bezier0(
+     aes(x=x, y=y, group=od_pair, alpha=f_od, colour=f_od, linewidth=f_od)
+     ) +
+  coord_sf(crs=st_crs(bs_villages), datum=NA)+
+  scale_colour_distiller(palette="Blues", direction=1, guide="none")+
+  scale_linewidth_continuous(range=c(.3,1), guide="none") +
+  scale_alpha(range=c(.3,1), guide="none") +
+  theme_void() +
+  annotation_custom(
+    grob=ggplotGrob(legend),
+    xmin=unname(bbox$xmin-+0.05*width),
+    xmax=unname(bbox$xmin+0.2*width),
+    ymin=unname(bbox$ymax)-0.1*height,
+    ymax=unname(bbox$ymax)
+  )
+  
+```
 
 
