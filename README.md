@@ -24,6 +24,8 @@ pairs. In `ggplot2` this can be achieved by passing coordinates to
 order to represent both outward and inward directions, we have to offset
 the locations (y-position) of the coordinate pairs.
 
+<img src="./man/figures/straight-line.svg" width="60%">
+
 ``` r
 od_pair <- tribble(
       ~direction, ~o_d,    ~x, ~y, 
@@ -42,8 +44,6 @@ od_pair |>
   scale_colour_manual(values=c("#b2182b", "#2166ac"), guide="none") +
   coord_equal(ylim=c(-.2, +.2), xlim=c(-.1, +1.1)) 
 ```
-
-<img src="./man/figures/straight-line.svg" width="60%">
 
 The [`ggforce`](https://ggforce.data-imaginist.com/) extension provides
 a function for generating various curves, and we can use `geom_bezier()`
@@ -85,6 +85,8 @@ character string naming the od-pair and locations in x and y of that
 OD’s origin an destination. The function returns a `tibble` of three
 rows representing origin, control point and destination respectively.
 
+<img src="./man/figures/bezier-line-asymmetric.svg" width="60%">
+
 ``` r
 dat <- bind_rows(
   outward=get_trajectory(o_x=0,o_y=0,d_x=1,d_y=0, "out") |>
@@ -101,8 +103,6 @@ dat |>
   scale_colour_manual(values=c("#b2182b", "#2166ac"), guide="none") +
   coord_equal() 
 ```
-
-<img src="./man/figures/bezier-line-asymmetric.svg" width="60%">
 
 ### Example
 

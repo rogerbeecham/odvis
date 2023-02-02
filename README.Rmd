@@ -50,6 +50,7 @@ theme_set(theme_void())
 
 Standard flow visualizations draw lines between origin-destination pairs. In `ggplot2` this can be achieved by passing coordinates to `geom_path()`, one row for *origin* and *destination* respectively. In order to represent both outward and inward directions, we have to offset the locations (y-position) of the coordinate pairs.
 
+<img src="./man/figures/straight-line.svg" width="60%">
 
 ``` {r, straight-line, eval=FALSE}
 od_pair <- tribble(
@@ -70,8 +71,6 @@ od_pair |>
   coord_equal(ylim=c(-.2, +.2), xlim=c(-.1, +1.1)) 
 
 ```
-
-<img src="./man/figures/straight-line.svg" width="60%">
 
 The [`ggforce`](https://ggforce.data-imaginist.com/) extension provides a function for generating various curves, and we can use `geom_bezier()` to add a control point to offset curves depending on whether the direction is *outward* (bends upward) or *inward* (bends downward). This allows us to represent the origin and destination point locations in their exact position.
 
@@ -101,6 +100,8 @@ od_pair |>
 
 A problem here is that the control point is not generalisable and the symbolisation not intuitive. The outward and inward directions are differentiated, but imagine a complex graph dataset with many edges in 2D space. So we move the control points such that lines curve towards the destination. This is achieved with `get_trajectory()`, which takes  a character string naming the od-pair and locations in x and y of that OD's origin an destination. The function returns a `tibble` of three rows representing origin, control point and destination respectively.  
 
+<img src="./man/figures/bezier-line-asymmetric.svg" width="60%">
+
 ``` {r, bezier-line-asymmetric, eval=FALSE}
 dat <- bind_rows(
   outward=get_trajectory(o_x=0,o_y=0,d_x=1,d_y=0, "out") |>
@@ -117,8 +118,6 @@ dat |>
   scale_colour_manual(values=c("#b2182b", "#2166ac"), guide="none") +
   coord_equal() 
 ```
-
-<img src="./man/figures/bezier-line-asymmetric.svg" width="60%">
 
 ### Example
 
