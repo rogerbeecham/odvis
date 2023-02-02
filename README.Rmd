@@ -74,6 +74,8 @@ od_pair |>
 
 The [`ggforce`](https://ggforce.data-imaginist.com/) extension provides a function for generating various curves, and we can use `geom_bezier()` to add a control point to offset curves depending on whether the direction is *outward* (bends upward) or *inward* (bends downward). This allows us to represent the origin and destination point locations in their exact position.
 
+<img src="./man/figures/bezier-line.svg" width="60%">
+
 ``` {r, bezier-line, eval=FALSE}
 od_pair <- tribble(
       ~direction, ~o_d,    ~x, ~y, 
@@ -95,8 +97,6 @@ od_pair |>
   scale_colour_manual(values=c("#b2182b", "#2166ac"), guide="none") +
   coord_equal(ylim=c(-.2, +.2), xlim=c(-.1, +1.1))
 ```
-
-<img src="./man/figures/bezier-line.svg" width="60%">
 
 A problem here is that the control point is not generalisable and the symbolisation not intuitive. The outward and inward directions are differentiated, but imagine a complex graph dataset with many edges in 2D space. So we move the control points such that lines curve towards the destination. This is achieved with `get_trajectory()`, which takes  a character string naming the od-pair and locations in x and y of that OD's origin an destination. The function returns a `tibble` of three rows representing origin, control point and destination respectively.  
 

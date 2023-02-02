@@ -52,6 +52,8 @@ direction is *outward* (bends upward) or *inward* (bends downward). This
 allows us to represent the origin and destination point locations in
 their exact position.
 
+<img src="./man/figures/bezier-line.svg" width="60%">
+
 ``` r
 od_pair <- tribble(
       ~direction, ~o_d,    ~x, ~y, 
@@ -73,8 +75,6 @@ od_pair |>
   scale_colour_manual(values=c("#b2182b", "#2166ac"), guide="none") +
   coord_equal(ylim=c(-.2, +.2), xlim=c(-.1, +1.1))
 ```
-
-<img src="./man/figures/bezier-line.svg" width="60%">
 
 A problem here is that the control point is not generalisable and the
 symbolisation not intuitive. The outward and inward directions are
