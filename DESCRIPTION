@@ -14,7 +14,7 @@ Suggests:
     testthat
 Depends: 
     R (>= 3.5.0)
-License: MIT + file LICENSE
+License: GPL (>= 3)
 Language: en-UK
 BugReports: https://github.com/rogerbeecham/odvis/issues
 URL: https://github.com/rogerbeecham/odvis
