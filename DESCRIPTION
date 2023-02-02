@@ -1,22 +1,24 @@
 Package: odvis
-Title: What the Package Does (One Line, Title Case)
+Title: Parameterising ggplot2 Graphics for Origin-Destination Visualization
 Version: 0.0.0.9000
 Authors@R: 
     person("Roger", "Beecham", , "r.j.beecham@leeds.ac.uk", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8563-7251"))
-Description: What the package does (one paragraph).
-License: MIT + file LICENSE
-Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
-URL: https://github.com/rogerbeecham/odvis
-BugReports: https://github.com/rogerbeecham/odvis/issues
+Maintainer: Roger Beecham <r.j.beecham@leeds.ac.uk>
+Description: Creates origin-destination graphics using 'ggplot2'. You provide the origin-destination data and 'odvis' (plus a complimentary package, 'gridmappr') provides functions that transform data such that it can be used by 'ggplot2' to generate flow-lines and matrix-based origin-destination visualizations. 
 Imports: 
     magrittr,
     tibble
-Depends: 
-    R (>= 2.10)
-LazyData: true
 Suggests: 
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
+    ggplot2,
+    testthat
+Depends: 
+    R (>= 3.5.0)
+License: MIT + file LICENSE
+Language: en-UK
+BugReports: https://github.com/rogerbeecham/odvis/issues
+URL: https://github.com/rogerbeecham/odvis
+RoxygenNote: 7.2.3
+LazyData: true
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)

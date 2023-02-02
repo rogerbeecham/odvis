@@ -5,16 +5,12 @@
 \alias{bs_ods}
 \title{Origin-destination London bikeshare trips 2018}
 \format{
-A tibble with 382,517 observation and 9 variables:
+A tibble with 238,927 observations and 5 variables:
 \describe{
-\item{start_station_id}{chr docking station id of origin}
-\item{end_station_id}{chr docking station id of destination}
-\item{o_name}{chr bikeshare village name of origin}
-\item{o_east}{dbl docking station easting of origin}
-\item{o_northing}{dbl docking station northing of origin}
-\item{d_name}{chr bikeshare village name of destination}
-\item{d_east}{dbl docking station easting of destination}
-\item{d_northing}{dbl docking station northing of destination}
+\item{od_pair}{chr docking station id of origin-destination}
+\item{o_station}{chr docking station id of origin}
+\item{d_station}{chr docking station id of destination}
+\item{period}{chr period of day, am or pm peak}
 \item{count}{int trip count for od pair}
 }
 }
@@ -25,6 +21,8 @@ A tibble with 382,517 observation and 9 variables:
 bs_ods
 }
 \description{
-Raw trip data are released by TfL. This is a cleaned and summarised dataset describing trip frequencies between unique OD docking station pairs.
+Raw trip data are released by TfL. This is a cleaned and summarised dataset describing
+trip frequencies between unique OD docking station pairs that take place during peak
+times: weekdays between 0700-1000 (am peak), 1600-1900 (pm peak).
 }
 \keyword{datasets}

@@ -20,6 +20,6 @@ A tibble with 66 observation and 4 variables:
 bs_villages
 }
 \description{
-Bikeshare villages are derived via a voronoi tesselation around key villages locations within the London bikeshare boundary.
+Bikeshare villages are derived via a voronoi tessellation around key villages locations within the London bikeshare boundary.
 }
 \keyword{datasets}
