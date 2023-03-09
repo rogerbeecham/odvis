@@ -4,7 +4,15 @@
 \alias{get_trajectory}
 \title{get_trajectory}
 \usage{
-get_trajectory(o_x, o_y, d_x, d_y, od_pair)
+get_trajectory(
+  o_x,
+  o_y,
+  d_x,
+  d_y,
+  od_pair,
+  curve_extent = -90,
+  curve_position = 6
+)
 }
 \arguments{
 \item{o_x}{Location in x of origin.}
@@ -16,6 +24,10 @@ get_trajectory(o_x, o_y, d_x, d_y, od_pair)
 \item{d_y}{Location in y of destination.}
 
 \item{od_pair}{Character string naming OD-pair.}
+
+\item{curve_extent}{Angle in degrees with which curves bend towards destination. Default is -90 degrees.}
+
+\item{curve_position}{Position relative to overall line length when curve begins. Default is 6 (1/6 of length).}
 }
 \value{
 A tibble of coordinate pairs representing the, origin, destination
