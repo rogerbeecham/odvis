@@ -10,8 +10,8 @@ get_trajectory(
   d_x,
   d_y,
   od_pair,
-  curve_extent = -90,
-  curve_position = 6
+  curve_angle = -90,
+  curve_extent = 6
 )
 }
 \arguments{
@@ -25,9 +25,9 @@ get_trajectory(
 
 \item{od_pair}{Character string naming OD-pair.}
 
-\item{curve_extent}{Angle in degrees with which curves bend towards destination. Default is -90 degrees.}
+\item{curve_angle}{Angle in degrees with which curves bend towards destination. Default is -90 degrees.}
 
-\item{curve_position}{Position relative to overall line length when curve begins. Default is 6 (1/6 of length).}
+\item{curve_extent}{Extent relative to overall line length that curve bends out. Default is 6 (length/6).}
 }
 \value{
 A tibble of coordinate pairs representing the, origin, destination

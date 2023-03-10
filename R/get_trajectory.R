@@ -14,8 +14,8 @@
 #' @param d_x Location in x of destination.
 #' @param d_y Location in y of destination.
 #' @param od_pair Character string naming OD-pair.
-#' @param curve_extent Angle in degrees with which curves bend towards destination. Default is -90 degrees.
-#' @param curve_position Position relative to overall line length when curve begins. Default is 6 (1/6 of length).
+#' @param curve_angle Angle in degrees with which curves bend towards destination. Default is -90 degrees.
+#' @param curve_extent Extent relative to overall line length that curve bends out. Default is 6 (length/6).
 #'
 #' @return A tibble of coordinate pairs representing the, origin, destination
 #' and control point of the asymmetric curve.
@@ -24,10 +24,10 @@
 #' @examples
 #' outward <- get_trajectory(o_x=0,o_y=0,d_x=1,d_y=0, "out")
 #' inward <- get_trajectory(o_x=1,o_y=0,d_x=0,d_y=0, "in")
-get_trajectory <- function(o_x, o_y, d_x, d_y, od_pair, curve_extent=-90, curve_position=6) {
-  curve_angle=get_radians(curve_extent)
-  x=(o_x-d_x)/curve_position
-  y=(o_y-d_y)/curve_position
+get_trajectory <- function(o_x, o_y, d_x, d_y, od_pair, curve_angle=-90, curve_extent=6) {
+  curve_angle=get_radians(curve_angle)
+  x=(o_x-d_x)/curve_extent
+  y=(o_y-d_y)/curve_extent
   c_x=d_x + x*cos(curve_angle) - y*sin(curve_angle)
   c_y=d_y + y*cos(curve_angle) + x*sin(curve_angle)
   d <- tibble::tibble(
